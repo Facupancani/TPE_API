@@ -12,7 +12,7 @@ class TaskApiController {
     public function __construct() {
         $this->model = new TaskModel();
         $this->view = new APIview();
-        //$this->data = file_get_contents("php://input");
+        $this->data = file_get_contents("php://input");
     }
     
     private function getData() {
@@ -34,9 +34,9 @@ class TaskApiController {
         $this->view->response("La tarea con el id={$id} no existe", 404);
     } 
     
-    public function deleteTask($params = null) {
+    public function deleteProduct($params = null) {
         $id = $params[':ID'];
-        $tarea = $this->model->get($id);
+        $tarea = $this->model->getProductByID($id);
         if ($tarea) {
             $this->model->delete($id);
             $this->view->response("La tarea fue borrada con exito.", 200);
@@ -44,30 +44,31 @@ class TaskApiController {
         $this->view->response("La tarea con el id={$id} no existe", 404);
     }
     
-    /*
-    public function addTask($params = null) {
+    
+    public function addProduct($params = null) {
         $data = $this->getData();
 
-        $id = $this->model->save($data->titulo, $data->descripcion, $data->prioridad);
+        $id = $this->model->insert($data->nombre, $data->precio, $data->id_categoria, $data->tipo, $data->imagen);
         
-        $tarea = $this->model->get($id);
-        if ($tarea)
-            $this->view->response($tarea, 200);
+        $product = $this->model->getProductByID($id);
+        if ($product)
+            $this->view->response($product, 200);
         else
             $this->view->response("La tarea no fue creada", 500);
 
     }
 
-    public function updateTask($params = null) {
+
+    public function updateProduct($params = null) {
         $id = $params[':ID'];
         $data = $this->getData();
         
-        $tarea = $this->model->get($id);
-        if ($tarea) {
-            $this->model->update($id, $data->prioridad);
-            $this->view->response("La tarea fue modificada con exito.", 200);
+        $producto = $this->model->getProductByID($id);
+        if ($producto) {
+            $this->model->updateProduct($id, $data->nombre, $data->precio, $data->id_categoria, $data->tipo, $data->imagen);
+            $this->view->response("El producto se ha modificado con exito", 200);
         } else
-            $this->view->response("La tarea con el id={$id} no existe", 404);
+            $this->view->response("El producto con el id={$id} no existe", 404);
     }
-*/
+
 }

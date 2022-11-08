@@ -8,11 +8,11 @@
     $router = new Router();
 
     // rutas
-    $router->addRoute("productos", "GET", "TaskApiController", "getProducts");
+    $router->addRoute("/productos", "GET", "TaskApiController", "getProducts");
     $router->addRoute("/productos/:ID", "GET", "TaskApiController", "getProduct");
-    $router->addRoute("/tareas/:ID", "DELETE", "TaskApiController", "deleteTask");
-    $router->addRoute("/tareas", "POST", "TaskApiController", "addTask");
-    $router->addRoute("/tareas/:ID", "PUT", "TaskApiController", "updateTask");
+    $router->addRoute("/productos/:ID", "DELETE", "TaskApiController", "deleteProduct");
+    $router->addRoute("/productos", "POST", "TaskApiController", "addProduct");
+    $router->addRoute("/productos/:ID", "PUT", "TaskApiController", "updateProduct");
 
     //run
     $router->route($_GET['resource'], $_SERVER['REQUEST_METHOD']); 

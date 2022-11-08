@@ -6,8 +6,8 @@ class TaskModel{
 
     //CONECT TO DATABASE
     function connect(){
-        $db = new PDO('mysql:host=localhost;'.'dbname=db_hoodies; charset=utf8', 'root', '');
-        return $db;
+        $this->db = new PDO('mysql:host=localhost;'.'dbname=db_hoodies; charset=utf8', 'root', '');
+        return $this->db;
     }
 
     // GET ALL CATEGORIES
@@ -104,7 +104,7 @@ class TaskModel{
           
         $sql = $db->prepare("INSERT INTO `producto` (`id`, `nombre`, `imagen`, `precio`, `tipo`, `id_categoria`) VALUES (NULL, '$name', '$pathImg', '$price', '$type', '$cat')");
         $sql->execute();
-        return;
+        return $db->lastInsertId();
     }
 
     private function uploadImage($image){
